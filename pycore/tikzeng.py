@@ -13,7 +13,7 @@ def to_head( projectpath ):
 
 def to_cor():
     return r"""
-\def\ConvColor{rgb:yellow,5;red,2.5;white,5}
+\def\ConvColor{rgb:yellow,5;red,1.5;white,5}
 \def\ConvReluColor{rgb:yellow,5;red,5;white,5}
 \def\PoolColor{rgb:red,1;black,0.3}
 \def\UnpoolColor{rgb:blue,2;green,1;black,0.3}
@@ -21,6 +21,11 @@ def to_cor():
 \def\FcReluColor{rgb:blue,5;red,5;white,4}
 \def\SoftmaxColor{rgb:magenta,5;black,7}   
 \def\SumColor{rgb:blue,5;green,15}
+
+\def\2ConvColor{rgb:yellow,4;red,2}
+\def\3ConvColor{rgb:yellow,1;red,8;white,1;green,1}
+\def\4ConvColor{rgb:red,4}
+
 """
 
 def to_begin():
@@ -41,7 +46,7 @@ def to_input( pathfile, to='(-3,0,0)', width=8, height=8, name="temp" ):
 """
 
 # Conv
-def to_Conv( name, s_filer=256, n_filer=64, offset="(0,0,0)", to="(0,0,0)", width=1, height=40, depth=40, caption=" " ):
+def to_Conv( name, s_filer=256, n_filer=64, offset="(0,0,0)", to="(0,0,0)", width=1, height=40, depth=40, caption=" ",color='ConvColor'):
     return r"""
 \pic[shift={"""+ offset +"""}] at """+ to +""" 
     {Box={
@@ -49,7 +54,7 @@ def to_Conv( name, s_filer=256, n_filer=64, offset="(0,0,0)", to="(0,0,0)", widt
         caption="""+ caption +r""",
         xlabel={{"""+ str(n_filer) +""", }},
         zlabel="""+ str(s_filer) +""",
-        fill=\ConvColor,
+        fill="""+f"\{color}" + """,
         height="""+ str(height) +""",
         width="""+ str(width) +""",
         depth="""+ str(depth) +"""
